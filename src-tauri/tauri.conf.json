@@ -12,9 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "onion-assignment",
-        "width": 800,
-        "height": 600
+        "decorations":false
       }
     ],
     "security": {
