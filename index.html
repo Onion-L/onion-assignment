@@ -5,109 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Onion Assignment</title>
-    <style>
-      .titlebar {
-        user-select: none;
-        display: flex;
-        width: 60%;
-        justify-content: flex-end;
-        position: fixed;
-        top: 0;
-        right: 0;
-      }
-      .titlebar-button {
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-      .titlebar-button:hover {
-        background: #d0d0d0;
-        cursor: pointer;
-      }
-      #titlebar-close:hover {
-        background: #ff0000b3;
-      }
-    </style>
   </head>
 
   <body>
-    <div data-tauri-drag-region class="titlebar">
-      <div class="titlebar-button" id="titlebar-minimize">
-        <img
-          src="https://api.iconify.design/mdi:window-minimize.svg"
-          alt="minimize"
-        />
-      </div>
-      <div class="titlebar-button" id="titlebar-maximize">
-        <img
-          id="maximize-icon"
-          src="https://api.iconify.design/mdi:window-maximize.svg"
-          alt="maximize"
-        />
-      </div>
-      <div class="titlebar-button" id="titlebar-close">
-        <img src="https://api.iconify.design/mdi:close.svg" alt="close" />
-      </div>
-    </div>
     <div id="root"></div>
-
-    <script type="module">
-      import { getCurrentWindow } from '@tauri-apps/api/window'
-      const appWindow = getCurrentWindow()
-      const maximizeIcon = document.getElementById('maximize-icon')
-
-      document
-        .getElementById('titlebar-minimize')
-        ?.addEventListener('click', () => {
-          console.log(111)
-          appWindow.minimize()
-        })
-
-      document
-        .getElementById('titlebar-close')
-        ?.addEventListener('click', () => appWindow.close())
-
-      document
-        .getElementById('titlebar-minimize')
-        ?.addEventListener('click', () => appWindow.minimize())
-
-      document
-        .getElementById('titlebar-maximize')
-        ?.addEventListener('click', async () => {
-          const isMaximized = await appWindow.isMaximized()
-          await appWindow.toggleMaximize()
-          if (maximizeIcon) {
-            maximizeIcon.src = isMaximized
-              ? 'https://api.iconify.design/mdi:window-maximize.svg'
-              : 'https://api.iconify.design/mdi:window-restore.svg'
-          }
-        })
-
-      document
-        .getElementById('titlebar-close')
-        ?.addEventListener('click', () => appWindow.close())
-
-      appWindow.isMaximized().then((isMaximized) => {
-        if (maximizeIcon) {
-          maximizeIcon.src = isMaximized
-            ? 'https://api.iconify.design/mdi:window-restore.svg'
-            : 'https://api.iconify.design/mdi:window-maximize.svg'
-        }
-      })
-
-      appWindow.onResized(async () => {
-        const isMaximized = await appWindow.isMaximized()
-        if (maximizeIcon) {
-          maximizeIcon.src = isMaximized
-            ? 'https://api.iconify.design/mdi:window-restore.svg'
-            : 'https://api.iconify.design/mdi:window-maximize.svg'
-        }
-      })
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
